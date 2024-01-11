@@ -32,8 +32,8 @@ const DATA_FILES = [
     DATA_FILES.map((files, i) => (
       <Card
         href={`/${files.title.toLowerCase()}`}
-        body=""
         title={files.title}
+        image={files.img}
       />
     ))
   }

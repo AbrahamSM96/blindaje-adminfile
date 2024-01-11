@@ -1,11 +1,11 @@
 ---
 interface Props {
   title: string
-  body: string
   href: string
+  image: string
 }
 
-const { href, title, body } = Astro.props
+const { href, title, image } = Astro.props
 ---
 
 <a
@@ -23,12 +23,11 @@ const { href, title, body } = Astro.props
     class="border-2 border-[#208e3f] bg-[#208e3f]/20
        rounded-lg relative md:h-[250px] min-h-[150px] h-full"
   >
-    <h2>
-      {title}
-      <span>&rarr;</span>
-    </h2>
-    <p>
-      {body}
-    </p>
+    <div>
+      <h2>
+        {title}
+        <span>&rarr;</span>
+      </h2>
+    </div>
   </article>
 </a>
