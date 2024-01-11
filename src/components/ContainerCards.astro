@@ -1,0 +1,40 @@
+---
+import Card from './Card.astro'
+
+const DATA_FILES = [
+  {
+    title: 'Documentos',
+    descripion: '',
+    img: ''
+  },
+  {
+    title: 'Evidencias',
+    descripion: '',
+    img: ''
+  },
+  {
+    title: 'Presentaciones',
+    descripion: '',
+    img: ''
+  },
+  {
+    title: 'Infografias',
+    descripion: '',
+    img: ''
+  }
+]
+---
+
+<section
+  class="grid grid-cols-1 gap-6 px-8 pt-10 md:grid-cols-2 xl:grid-cols-4"
+>
+  {
+    DATA_FILES.map((files, i) => (
+      <Card
+        href={`/${files.title.toLowerCase()}`}
+        body=""
+        title={files.title}
+      />
+    ))
+  }
+</section>
