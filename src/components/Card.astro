@@ -3,31 +3,37 @@ interface Props {
   title: string
   href: string
   image: string
+  class: string
 }
 
 const { href, title, image } = Astro.props
 ---
 
 <a
-  class="col-span-1 xl:col-span-2
-        row-span-1
-        [animation:linear_reveal_both]
-        ![animation-range:entry_5%_cover_30%]
-        ![animation-timeline:view()]
-        group
-        relative
-        transform hover:scale-105 hover:contrast-150"
+  class={`${Astro.props.class} group relative rounded-xl backdrop-blur-md border border-black/10 shadow-inner shadow-white/10 `}
   href={href}
 >
-  <article
-    class="border-2 border-[#208e3f] bg-[#208e3f]/20
-       rounded-lg relative md:h-[250px] min-h-[150px] h-full"
-  >
-    <div>
-      <h2>
+  <article class="h-full w-full cursor-pointer">
+    <div
+      class="absolute z-10 bottom-0 top-0 w-full h-full bg-gradient-to-b from-transparent from-40% via-black/50 to-black/80"
+    >
+    </div>
+    <div
+      class="relative h-full select-none flex flex-col gap-1 p-6 text-lg z-10 justify-end"
+    >
+      <h2
+        class="bottom-0 font-semibold text-balance text-white text-2xl md:text-3xl"
+      >
         {title}
-        <span>&rarr;</span>
+        <span class="text-2xl md:text-3xl font-semibold text-sky-200/80"
+          >&rarr;</span
+        >
       </h2>
     </div>
+    <figure
+      class="flex justify-center w-full -z-10 h-full bg-center bg-blend-luminosity bg-cover bg-no-repeat absolute left-0 top-0 bottom-0 object-cover object-center group-hover:scale-110 transition-transform duration 1000 ease-in-out opacity-90"
+    >
+      <img class="relative h-full" src={image} />
+    </figure>
   </article>
 </a>

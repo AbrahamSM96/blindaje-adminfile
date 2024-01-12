@@ -1,40 +1,49 @@
 ---
 import Card from './Card.astro'
+import DocumentsIcon from './icons/Documents.svg'
 
 const DATA_FILES = [
   {
     title: 'Documentos',
     descripion: '',
-    img: ''
+    image: '/icons/documents.svg',
+    class: 'col-span-10 md:col-span-4'
   },
   {
     title: 'Evidencias',
     descripion: '',
-    img: ''
+    image: '/icons/evidences.svg',
+    class: 'col-span-10 md:col-span-6'
   },
   {
     title: 'Presentaciones',
     descripion: '',
-    img: ''
+    image: '/icons/presentation.svg',
+    class: 'col-span-10 md:col-span-6'
   },
   {
     title: 'Infografias',
     descripion: '',
-    img: ''
+    image: '/icons/infografias.svg',
+    class: 'col-span-10 md:col-span-4'
+  },
+  {
+    title: 'Multimedia',
+    descripion: '',
+    image: '/icons/multimedia.svg',
+    class: 'col-span-10 md:col-span-full'
   }
 ]
 ---
 
 <section
-  class="grid grid-cols-1 gap-6 px-8 pt-10 md:grid-cols-2 xl:grid-cols-4"
+  class="w-full max-w-[1400px]
+    grid lg:grid-cols-10 auto-rows-[30rem] gap-4
+    mx-auto p-6 md:p-12 lg:p-20"
 >
   {
     DATA_FILES.map((files, i) => (
-      <Card
-        href={`/${files.title.toLowerCase()}`}
-        title={files.title}
-        image={files.img}
-      />
+      <Card {...files} href={`/${files.title.toLowerCase()}`} />
     ))
   }
 </section>
