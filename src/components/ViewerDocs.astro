@@ -1,0 +1,40 @@
+---
+import PdfIcon from './icons/Pdf.astro'
+import * as fs from 'fs'
+import * as path from 'path'
+
+const nameCurrentPath = Astro.url.pathname.replace('/', '')
+
+const dir = `./public/blindaje_material/${nameCurrentPath}`
+
+const countFilesInDirectory = (dirPath: string) => {
+  try {
+    // Sincroniza la lectura del contenido del directorio
+    const files = fs.readdirSync(dirPath)
+
+    // Filtra para contar solo archivos, excluyendo directorios
+    const fileCount = files.filter((file) =>
+      fs.statSync(path.join(dirPath, file)).isFile()
+    )
+
+    return fileCount
+  } catch (error) {
+    console.error('Error reading directory:', error)
+    return 0
+  }
+}
+
+const dataFiles = countFilesInDirectory(dir)
+console.log(dataFiles, 'dataLengthFiles')
+---
+
+<section class="grid grid-cols-2 md:grid-cols-5">
+  {
+    dataFiles.map((file) => (
+      <a href={`/blindaje_material/documentos/${file}`} target="_blank">
+        <PdfIcon />
+        <span>{file.replace('.pdf', '')}</span>
+      </a>
+    ))
+  }
+</section>
