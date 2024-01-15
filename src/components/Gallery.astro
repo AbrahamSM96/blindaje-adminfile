@@ -29,7 +29,7 @@ const countFilesInDirectory = (dirPath: string) => {
 const dataLengthFiles = countFilesInDirectory(dir)
 ---
 
-<section class="max-w-8xl mx-auto py-20 px-20">
+<section class="max-w-10xl mx-auto px-10 pt-0 pb-10 md:py-20 md:px-20">
   <h2
     class="mx-auto mb-8 text-center text-3xl lg:text-6xl font-semibold tracking-wide text-white uppercase"
   >
@@ -39,7 +39,7 @@ const dataLengthFiles = countFilesInDirectory(dir)
 
   <masonry-layout
     gap="24"
-    maxcolwidth="600"
+    maxcolwidth="800"
     class="lg:mx-auto mx-4 py-20"
     id="gallery"
   >
@@ -115,9 +115,7 @@ const dataLengthFiles = countFilesInDirectory(dir)
           $clone.setAttribute('data-pswp-height', img.height)
           $clone.setAttribute(
             'href',
-            `/blindaje_material/${nameCurrentPath}/${nameCurrentPath}-${
-              i + 1
-            }.jpg`
+            `/blindaje_material/${nameCurrentPath}/${nameCurrentPath}-${imgIndex}.jpg`
           )
           $clone.classList.add('animate-fade-up')
           $clone.classList.add('animate-delay-300')
@@ -126,17 +124,13 @@ const dataLengthFiles = countFilesInDirectory(dir)
             .querySelector('img:first-child')
             .setAttribute(
               'src',
-              `/blindaje_material/${nameCurrentPath}/${nameCurrentPath}-${
-                i + 1
-              }.jpg`
+              `/blindaje_material/${nameCurrentPath}/${nameCurrentPath}-${imgIndex}.jpg`
             )
           $clone
             .querySelector('img:last-child')
             .setAttribute(
               'src',
-              `/blindaje_material/${nameCurrentPath}/${nameCurrentPath}-${
-                i + 1
-              }.jpg`
+              `/blindaje_material/${nameCurrentPath}/${nameCurrentPath}-${imgIndex}.jpg`
             )
 
           return $clone?.outerHTML
@@ -156,5 +150,21 @@ const dataLengthFiles = countFilesInDirectory(dir)
 
   #gallery a {
     cursor: zoom-in;
+    animation: fade-up-images linear both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 20%;
+  }
+
+  @keyframes fade-up-images {
+    0% {
+      opacity: 0;
+      translate: 0 50px;
+      scale: 0.7;
+    }
+    100% {
+      opacity: 1;
+      translate: 0 0;
+      scale: 1;
+    }
   }
 </style>
