@@ -20,20 +20,32 @@ const countFilesInDirectory = (dirPath: string) => {
     return fileCount
   } catch (error) {
     console.error('Error reading directory:', error)
-    return 0
+    return []
   }
 }
 
-const dataFiles = countFilesInDirectory(dir)
+const dataFiles: string[] = countFilesInDirectory(dir)
 console.log(dataFiles, 'dataLengthFiles')
 ---
 
-<section class="grid grid-cols-2 md:grid-cols-5">
+<section class="grid grid-cols-2 md:grid-cols-4 h-full w-full gap-4">
   {
     dataFiles.map((file) => (
-      <a href={`/blindaje_material/documentos/${file}`} target="_blank">
-        <PdfIcon />
-        <span>{file.replace('.pdf', '')}</span>
+      <a
+        href={`/blindaje_material/documentos/${file}`}
+        target="_blank"
+        class="h-full w-full p-2 group backdrop-blur-md relative rounded-xl border-2 border-[#fbbf24] bg-[#fbbf24]/20 shadow-inner shadow-white/10 transform hover:scale-105 hover:border-cyan-50"
+      >
+        <div class="flex justify-around">
+          <PdfIcon class:list={[' group-hover:animate-wiggle']} />
+          {file && (
+            <div class="max-w-24 md:max-w-40 p-2  border border-black/10 rounded-xl flex justify-center items-center bg-black/40 text-white">
+              <span class="text-pretty line-clamp-2 text-[12px] md:text-sm md:line-clamp-1 capitalize">
+                {file}
+              </span>
+            </div>
+          )}
+        </div>
       </a>
     ))
   }
