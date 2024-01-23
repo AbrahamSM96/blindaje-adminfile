@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
+    "dev:host": "astro dev --host",
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
@@ -15,10 +16,12 @@
   "dependencies": {
     "@appnest/masonry-layout": "^2.2.3",
     "@astrojs/check": "^0.4.1",
+    "@astrojs/preact": "^3.1.0",
     "@astrojs/tailwind": "^5.1.0",
     "@fontsource/montserrat": "^5.0.16",
     "astro": "^4.1.1",
     "image-meta": "^0.2.0",
+    "image-size": "^1.1.1",
     "photoswipe": "^5.4.3",
     "preact": "^10.19.3",
     "sharp": "^0.33.2",
