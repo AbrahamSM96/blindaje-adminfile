@@ -1,5 +1,8 @@
 ---
 import Gallery from '../Gallery.astro'
+import editionsInfo from '../../data/evidencias-meta-gallery.json'
+const description =
+  'Capturas de pantalla y fotos de imagenes del blindaje electoral 2024'
 ---
 
-<Gallery />
+<Gallery metaPhotos={editionsInfo} description={description} />
