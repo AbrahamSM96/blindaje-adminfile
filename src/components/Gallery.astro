@@ -1,11 +1,10 @@
 ---
-// import { Glob } from 'bun'
 import 'photoswipe/style.css'
 import * as fs from 'fs'
 import * as path from 'path'
 // import editionsInfo from '../data/infografias-meta-gallery.json'
 interface Props {
-  metaPhotos: { width: number; height: number }[]
+  metaPhotos?: { width: number; height: number }[] | null
   description: string
 }
 const offset = 10
@@ -37,7 +36,7 @@ const dataLengthFiles = countFilesInDirectory(dir)
 const { metaPhotos, description = '' } = Astro.props
 ---
 
-<section class="max-w-10xl mx-auto px-10 pt-0 pb-10 md:py-20 md:px-20">
+<section class="max-w-10xl mx-auto px-10 pt-0 pb-10 md:pb-20 md:px-20">
   <h2
     class="mx-auto mb-8 text-center text-3xl lg:text-6xl font-semibold tracking-wide text-white uppercase"
   >
@@ -52,41 +51,60 @@ const { metaPhotos, description = '' } = Astro.props
     id="gallery"
   >
     {
-      metaPhotos.map(({ height, width }, i) => (
-        <a
-          class="group rounded-xl hover:scale-105 hover:contrast-[110%] transition-all relative"
-          href={`/blindaje_material/${nameCurrentPath}/${nameCurrentPath}-${
-            i + 1
-          }.webp`}
-          target="_blank"
-          data-cropped="true"
-          data-pswp-width={width}
-          data-pswp-height={height}
-        >
-          <img
-            class="rounded-xl object-cover w-full h-auto"
-            loading="lazy"
-            src={`/blindaje_material/${nameCurrentPath}/${nameCurrentPath}-${
-              i + 1
-            }.webp`}
-            alt={`${nameCurrentPath}-${i}`}
-          />
-          <img
-            class="blur-md opacity-0 group-hover:opacity-100 absolute inset-0 transition contrast-150 -z-10 object-cover"
-            loading="lazy"
-            src={`/blindaje_material/${nameCurrentPath}/${nameCurrentPath}-${
-              i + 1
-            }.webp`}
-            alt={`Imagen con efecto blur para hacer de sombra de una fotografía de ${nameCurrentPath}-${i}`}
-          />
-        </a>
-      ))
+      Array.isArray(metaPhotos) &&
+        metaPhotos.map(({ height, width }, i) => (
+          <>
+            <a
+              class="group rounded-xl hover:scale-105 hover:contrast-[110%] transition-all relative"
+              href={`/blindaje_material/${nameCurrentPath}/${nameCurrentPath}-${
+                i + 1
+              }.webp`}
+              target="_blank"
+              data-cropped="true"
+              data-pswp-width={width}
+              data-pswp-height={height}
+            >
+              <img
+                class="rounded-xl object-cover w-full h-auto"
+                loading="lazy"
+                src={`/blindaje_material/${nameCurrentPath}/${nameCurrentPath}-${
+                  i + 1
+                }.webp`}
+                alt={`${nameCurrentPath}-${i}`}
+              />
+              <img
+                class="blur-md opacity-0 group-hover:opacity-100 absolute inset-0 transition contrast-150 -z-10 object-cover"
+                loading="lazy"
+                src={`/blindaje_material/${nameCurrentPath}/${nameCurrentPath}-${
+                  i + 1
+                }.webp`}
+                alt={`Imagen con efecto blur para hacer de sombra de una fotografía de ${nameCurrentPath}-${i}`}
+              />
+            </a>
+          </>
+        ))
     }
   </masonry-layout>
 
-  <div class="text-center mx-auto">
-    <button id="load-more">Descúbrelas todas</button>
-  </div>
+  {
+    Array.isArray(metaPhotos) && (
+      <div class="text-center mx-auto">
+        <button id="load-more">Descúbrelas todas</button>
+      </div>
+    )
+  }
+
+  {
+    !Array.isArray(metaPhotos) && (
+      <>
+        <div class="flex justify-center h-full w-full items-center p-32">
+          <h1 class="text-3xl text-white ">
+            Lo siento, no hay información disponible
+          </h1>
+        </div>
+      </>
+    )
+  }
 </section>
 
 <script>
