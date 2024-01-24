@@ -19,7 +19,6 @@ export default function DarkModeButton() {
     }
     console.log('holaaa')
   }
-  console.log('oaoaoaoa')
   return (
     <button
       style={{ height: '15px', width: '15px' }}
