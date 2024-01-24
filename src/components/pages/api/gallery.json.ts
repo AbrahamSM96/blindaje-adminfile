@@ -12,5 +12,5 @@ export const GET: APIRoute = ({ request }) => {
   const editionIndex = edition - 1
   const editionInfo = galleryInfo[editionIndex]
 
-  return new Response(JSON.stringify(editionInfo.slice(offset)))
+  return new Response(JSON.stringify(editionInfo?.slice(offset)))
 }
