@@ -2,11 +2,26 @@
 import Card from '../components/Card.astro'
 import Header from '../components/Header.astro'
 import HomeGallery from '../components/HomeGallery.astro'
+import DisclaimerText from '../components/DisclaimerText.astro'
 import Layout from '../layouts/Layout.astro'
+
+// const isActive = window.sessionStorage.getItem('disclaimer')
 ---
 
 <Layout title="Bienestar Hgo">
+  <!-- {isActive && <DisclaimerText />} -->
+
   <HomeGallery />
+  <DisclaimerText />
 </Layout>
 
-<style></style>
+<script>
+  // const disclaimerBanner = document.getElementById('informational-banner')
+
+  // if (sessionStorage.getItem('disclaimer') === 'active') {
+  //   disclaimerBanner?.classList.toggle('hidden')
+  //   sessionStorage.setItem('disclaimer', 'false')
+  // } else {
+  //   disclaimerBanner?.classList.remove('hidden')
+  // }
+</script>

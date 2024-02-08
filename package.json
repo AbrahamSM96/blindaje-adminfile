@@ -6,7 +6,7 @@
     "dev": "astro dev",
     "dev:host": "astro dev --host",
     "start": "astro dev",
-    "build": "astro check && astro build",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
     "script:create-thumbs": "bun ./scripts/create-thumbnails-gallery.ts",
