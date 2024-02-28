@@ -38,11 +38,11 @@ const { metaPhotos, description = '' } = Astro.props
 
 <section class="max-w-10xl mx-auto px-10 pt-0 pb-10 md:pb-20 md:px-20">
   <h2
-    class="mx-auto mb-8 text-center text-3xl lg:text-6xl font-semibold tracking-wide text-white uppercase"
+    class="mx-auto mb-8 text-center text-3xl lg:text-6xl font-semibold tracking-wide uppercase"
   >
     {nameCurrentPath}
   </h2>
-  <p class="text-center text-2xl text-white">{description}</p>
+  <p class="text-center text-2xl">{description}</p>
 
   <masonry-layout
     gap="24"
@@ -98,9 +98,7 @@ const { metaPhotos, description = '' } = Astro.props
     !Array.isArray(metaPhotos) && (
       <>
         <div class="flex justify-center h-full w-full items-center p-32">
-          <h1 class="text-3xl text-white ">
-            Lo siento, no hay información disponible
-          </h1>
+          <h1 class="text-3xl  ">Lo siento, no hay información disponible</h1>
         </div>
       </>
     )

@@ -14,37 +14,35 @@ const { title } = Astro.props
 
 <!doctype html>
 <html lang="es">
-  <meta charset="UTF-8" />
-  <meta name="description" content="Astro description" />
-  <meta name="viewport" content="width=device-width" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <meta name="generator" content={Astro.generator} />
-  <meta name="creator" content="Abraham SM" />
-  <script>
-    if (
-      localStorage.theme === 'dark' ||
-      (!('theme' in localStorage) &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
-      document.documentElement.classList.add('dark')
-      // We set the inner HTML when the user prefers dark mode to remove any FOUC when the SVG changes from its default light mode svg
-      const darkModeButton = document.querySelector(
-        '.dark-mode-button'
-      ) as HTMLButtonElement
-      darkModeButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-      <path
-        d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"
-      />
-    </svg>
-        `
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
-  </script>
-  <title>{title}</title>
+  <head>
+    <title>{title}</title>
+
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="creator" content="Abraham SM" />
+    <script is:inline>
+      window.getThemePreference = () => {
+        const localItem =
+          typeof localStorage !== 'undefined' && localStorage.getItem('theme')
+        if (localItem) return localItem
+        return window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light'
+      }
+
+      const isDark = window.getThemePreference() === 'dark'
+      document.documentElement.classList.toggle('dark', isDark)
+    </script>
+  </head>
+
   <ViewTransitions />
 
-  <body class="min-h-screen">
+  <body
+    class="min-h-screen [&_:focus-visible]:outline-none [&_:focus-visible]:ring-2 [&_:focus-visible]:ring-primary"
+  >
     <Banner />
     <Header />
 
@@ -53,21 +51,65 @@ const { title } = Astro.props
       <slot />
     </main>
     <Footer />
-    <style is:global>
-      html {
-        --color-rose-700: hsl(345, 83%, 41%);
-        --color-violet-200: #313131;
-        --color-slate-900: hsl(222, 47%, 11%);
-
-        --color-primary: var(--color-rose-700);
-        --color-background: var(--color-violet-200);
-        --color-neutral: var(--color-slate-900);
-        font-family: 'Montserrat', system-ui, sans-serif;
-        color-scheme: dark light;
-        /* background-color: #313131; */
-        color: var(--color-neutral);
-        background-color: var(--color-background);
-      }
-    </style>
   </body>
+
+  <style is:global>
+    :root {
+      --color-rose-700: hsl(345, 83%, 41%);
+      --color-violet-200: #313131;
+      --color-slate-900: hsl(222, 47%, 11%);
+      --color-secondary: #ddd;
+
+      --color-primary: var(--color-rose-700);
+      --color-background: var(--color-violet-200);
+      --color-neutral: var(--color-slate-900);
+
+      --background-color: var(--color-secondary);
+    }
+    .dark {
+      --color-primary: #ddd;
+      --color-secondary: #333;
+      --color-neutral: #ddd;
+      --background-color: var(--color-secondary);
+    }
+    html {
+      font-family: 'Montserrat', system-ui, sans-serif;
+      /* background-color: #313131; */
+      color: var(--color-neutral);
+
+      background-color: var(--background-color);
+    }
+
+    /* Hiding class, making content visible only to screen readers but not visually */
+    /* "sr" meaning "screen-reader" */
+    .sr-only:not(:focus):not(:active) {
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      height: 1px;
+      overflow: hidden;
+      position: absolute;
+      white-space: nowrap;
+      width: 1px;
+    }
+
+    ::-webkit-scrollbar {
+      width: 10px;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: theme('colors.white');
+      border: 2px solid transparent;
+      background-clip: content-box;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--background-image);
+    }
+
+    ::-webkit-scrollbar-corner {
+      background: var(--background-image);
+    }
+  </style>
 </html>
