@@ -46,6 +46,15 @@ import PadlockIcon from './icons/Padlock.astro'
         updateThemeMessage(isDark ? 'dark' : 'light')
       }
 
+      function persistDarkMode() {
+        const element = document.documentElement
+        const storedTheme = localStorage.getItem('theme')
+        const themeToApply = storedTheme === 'dark' ? 'dark' : 'light'
+
+        element.classList.toggle(themeToApply)
+        localStorage.setItem('theme', themeToApply)
+      }
+
       function updateThemeMessage(theme) {
         const translation = theme === 'dark' ? 'oscuro' : 'claro'
         const actualThemeMsg = `Alternar tema, el tema actual es ${translation}`
@@ -58,6 +67,7 @@ import PadlockIcon from './icons/Padlock.astro'
       document
         .getElementById('themeToggle')
         .addEventListener('click', handleToggleClick)
+      document.addEventListener('astro:after-swap', persistDarkMode)
       updateThemeMessage(window.getThemePreference())
     </script>
   </nav>

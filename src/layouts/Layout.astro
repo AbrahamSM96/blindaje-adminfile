@@ -27,6 +27,7 @@ const { title } = Astro.props
       window.getThemePreference = () => {
         const localItem =
           typeof localStorage !== 'undefined' && localStorage.getItem('theme')
+
         if (localItem) return localItem
         return window.matchMedia('(prefers-color-scheme: dark)').matches
           ? 'dark'
@@ -46,7 +47,7 @@ const { title } = Astro.props
     <Banner />
     <Header />
 
-    <main class="max-w-8xl px-14 m-auto">
+    <main class="max-w-8xl px-0 sm:px-6 md:px-14 m-auto">
       <!-- <div id="app" class="relative h-screen p-2 gap-2"></div> -->
       <slot />
     </main>
