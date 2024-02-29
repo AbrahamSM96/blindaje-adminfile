@@ -1,6 +1,5 @@
 ---
 import Card from './Card.astro'
-import DocumentsIcon from './icons/Documents.svg'
 
 const DATA_FILES = [
   {
@@ -31,7 +30,13 @@ const DATA_FILES = [
     title: 'Multimedia',
     descripion: '',
     image: '/icons/multimedia.svg',
-    class: 'col-span-10 md:col-span-full'
+    class: 'col-span-10 md:col-span-4'
+  },
+  {
+    title: 'Centros Atención Regionales',
+    descripion: '',
+    image: '/icons/attentionPerson.svg',
+    class: 'col-span-10 md:col-span-6'
   }
 ]
 ---
@@ -39,11 +44,18 @@ const DATA_FILES = [
 <section
   class="w-full max-w-[1400px]
     grid lg:grid-cols-10 auto-rows-[30rem] gap-4
-    mx-auto p-6 md:p-12 lg:px-20 lg:pb-20"
+    mx-auto md:p-12 lg:px-20 lg:pb-20"
 >
   {
     DATA_FILES.map((files, i) => (
-      <Card {...files} href={`/${files.title.toLowerCase()}`} />
+      <Card
+        {...files}
+        href={`/${files.title
+          .toLowerCase()
+          .replace(/\s/g, '')
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')}`}
+      />
     ))
   }
 </section>
