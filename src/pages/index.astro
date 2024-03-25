@@ -4,6 +4,7 @@ import Header from '../components/Header.astro'
 import HomeGallery from '../components/HomeGallery.astro'
 import DisclaimerText from '../components/DisclaimerText.astro'
 import Layout from '../layouts/Layout.astro'
+import LinkIcon from '../components/icons/Link.astro'
 
 // const isActive = window.sessionStorage.getItem('disclaimer')
 ---
@@ -13,15 +14,35 @@ import Layout from '../layouts/Layout.astro'
 
   <HomeGallery />
   <DisclaimerText />
+  <section class="grid grid-cols-2 md:grid-cols-6 w-full gap-2 md:gap-10 p-4">
+    <a
+      href="https://www.gob.mx/bienestar/blindajeelectoral"
+      target="_blank"
+      class="h-full w-full p-2 group backdrop-blur-md relative rounded-xl border-2 border-[#fbbf24] bg-[#333]/20 shadow-inner shadow-white/10 transform hover:scale-105 hover:border-cyan-50"
+    >
+      <div class="flex justify-around align-middle h-7">
+        <LinkIcon class:list={['group-hover:animate-wiggle']} />
+        {
+          (
+            <div class="max-w-24 md:max-w-40 p-2  border border-black/10 rounded-xl flex justify-center items-center bg-black/40 ">
+              <span class="text-pretty line-clamp-2 text-[8px] sm:text-xs  md:text-sm md:line-clamp-1 capitalize">
+                Blindaje Electoral
+              </span>
+            </div>
+          )
+        }
+      </div>
+    </a>
+  </section>
+
+  <script>
+    // const disclaimerBanner = document.getElementById('informational-banner')
+
+    // if (sessionStorage.getItem('disclaimer') === 'active') {
+    //   disclaimerBanner?.classList.toggle('hidden')
+    //   sessionStorage.setItem('disclaimer', 'false')
+    // } else {
+    //   disclaimerBanner?.classList.remove('hidden')
+    // }
+  </script>
 </Layout>
-
-<script>
-  // const disclaimerBanner = document.getElementById('informational-banner')
-
-  // if (sessionStorage.getItem('disclaimer') === 'active') {
-  //   disclaimerBanner?.classList.toggle('hidden')
-  //   sessionStorage.setItem('disclaimer', 'false')
-  // } else {
-  //   disclaimerBanner?.classList.remove('hidden')
-  // }
-</script>

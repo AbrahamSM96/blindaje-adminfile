@@ -13,6 +13,12 @@ const offset = 10
 
 const nameCurrentPath = Astro.url.pathname.replace('/', '')
 
+const renameTitles: { [key: string]: string } = {
+  centrosatencionregionales: 'Centros de Atención Regionales'
+}
+
+const renamedTitle = renameTitles[nameCurrentPath] ?? nameCurrentPath
+
 const dir = `./public/blindaje_material/${nameCurrentPath}`
 
 const countFilesInDirectory = (dirPath: string) => {
@@ -34,13 +40,14 @@ const countFilesInDirectory = (dirPath: string) => {
 
 const dataLengthFiles = countFilesInDirectory(dir)
 const { metaPhotos, description = '' } = Astro.props
+console.log(metaPhotos, 'metaPhotos')
 ---
 
 <section class="max-w-10xl mx-auto px-10 pt-0 pb-10 md:pb-20 md:px-20">
   <h2
     class="mx-auto mb-8 text-center text-3xl lg:text-6xl font-semibold tracking-wide uppercase"
   >
-    {nameCurrentPath}
+    {renamedTitle}
   </h2>
   <p class="text-center text-2xl">{description}</p>
 
