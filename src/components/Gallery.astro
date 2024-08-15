@@ -12,6 +12,7 @@ const offset = 10
 // const photos = editionsInfo.slice(0, offset)
 
 const nameCurrentPath = Astro.url.pathname.replace('/', '')
+const cleanPath = nameCurrentPath.endsWith('/') ? nameCurrentPath.slice(0, -1) : nameCurrentPath;
 
 const renameTitles: { [key: string]: string } = {
   centrosatencionregionales: 'Centros de Atención Regionales'
@@ -58,13 +59,12 @@ const { metaPhotos, description = '' } = Astro.props
   >
     {
       Array.isArray(metaPhotos) &&
-        metaPhotos.map(({ height, width }, i) => (
-          <>
+        metaPhotos.map(({ height, width }, i) => {
+          const URL_IMG = `/blindaje_material/${cleanPath}/${cleanPath}-${i + 1}.webp`
+          return(<>
             <a
               class="group rounded-xl hover:scale-105 hover:contrast-[110%] transition-all relative"
-              href={`/blindaje_material/${nameCurrentPath}/${nameCurrentPath}-${
-                i + 1
-              }.webp`}
+              href={URL_IMG}
               target="_blank"
               data-cropped="true"
               data-pswp-width={width}
@@ -73,22 +73,18 @@ const { metaPhotos, description = '' } = Astro.props
               <img
                 class="rounded-xl object-cover w-full h-auto"
                 loading="lazy"
-                src={`/blindaje_material/${nameCurrentPath}/${nameCurrentPath}-${
-                  i + 1
-                }.webp`}
-                alt={`${nameCurrentPath}-${i}`}
+                src={URL_IMG}
+                alt={`${cleanPath}-${i}`}
               />
               <img
                 class="blur-md opacity-0 group-hover:opacity-100 absolute inset-0 transition contrast-150 -z-10 object-cover"
                 loading="lazy"
-                src={`/blindaje_material/${nameCurrentPath}/${nameCurrentPath}-${
-                  i + 1
-                }.webp`}
-                alt={`Imagen con efecto blur para hacer de sombra de una fotografía de ${nameCurrentPath}-${i}`}
+                src={URL_IMG}
+                alt={`Imagen con efecto blur para hacer de sombra de una fotografía de ${cleanPath}-${i}`}
               />
             </a>
-          </>
-        ))
+          </>)
+        })
     }
   </masonry-layout>
 
