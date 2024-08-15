@@ -20,6 +20,7 @@
     "@astrojs/tailwind": "^5.1.0",
     "@fontsource/montserrat": "^5.0.16",
     "astro": "^4.1.1",
+    "caniuse-lite": "^1.0.30001651",
     "image-meta": "^0.2.0",
     "image-size": "^1.1.1",
     "photoswipe": "^5.4.3",
