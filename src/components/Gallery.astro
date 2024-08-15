@@ -18,7 +18,7 @@ const renameTitles: { [key: string]: string } = {
   centrosatencionregionales: 'Centros de Atención Regionales'
 }
 
-const renamedTitle = renameTitles[nameCurrentPath] ?? nameCurrentPath
+const renamedTitle = renameTitles[cleanPath] ?? cleanPath
 
 const dir = `./public/blindaje_material/${nameCurrentPath}`
 
