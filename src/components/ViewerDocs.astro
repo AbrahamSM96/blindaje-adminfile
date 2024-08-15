@@ -4,6 +4,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 
 const nameCurrentPath = Astro.url.pathname.replace('/', '')
+const cleanPath = nameCurrentPath.endsWith('/') ? nameCurrentPath.slice(0, -1) : nameCurrentPath;
 
 const dir = `./public/blindaje_material/${nameCurrentPath}`
 
@@ -27,9 +28,17 @@ const countFilesInDirectory = (dirPath: string) => {
 const dataFiles: string[] = countFilesInDirectory(dir)
 ---
 
+
 <section
-  class="grid grid-cols-2 md:grid-cols-4 h-full w-full gap-2 md:gap-10 pb-[450px]"
+  
 >
+<h2
+class="mx-auto mb-8 text-center text-3xl lg:text-6xl tracking-wide font-normal font-[GMX] uppercase"
+>
+{cleanPath}
+</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 h-full w-full gap-2 md:gap-10 pb-[450px]">
+
   {
     dataFiles.map((file) => (
       <a
@@ -50,4 +59,6 @@ const dataFiles: string[] = countFilesInDirectory(dir)
       </a>
     ))
   }
+</div>
+
 </section>
