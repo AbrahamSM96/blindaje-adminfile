@@ -1,0 +1,36 @@
+---
+
+interface Props {
+  data: { YT_ID: string; title: string }[] | null
+}
+
+const { data } = Astro.props
+const nameCurrentPath = Astro.url.pathname.replace('/', '')
+const cleanPath = nameCurrentPath.endsWith('/') ? nameCurrentPath.slice(0, -1) : nameCurrentPath;
+
+---
+<section class="max-w-10xl mx-auto px-10 pt-0 pb-10 md:pb-20 md:px-20">
+    <h2
+    class="mx-auto mb-8 text-center text-3xl lg:text-6xl tracking-wide font-normal font-[GMX] uppercase"
+    >
+    {cleanPath}
+    </h2>
+<div
+class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 "     
+>
+{
+  Array.isArray(data) &&
+  data.map(({ YT_ID, title }, i) => {
+      return(<>
+        <figure>
+
+        <lite-youtube videoid={YT_ID} >
+</lite-youtube>
+<span>{title}</span>
+        </figure>
+
+      </>)
+    })
+}
+</div>
+</section>

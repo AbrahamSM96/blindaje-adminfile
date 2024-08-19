@@ -1,0 +1,25 @@
+---
+import LinkIcon from '../components/icons/Link.astro'
+
+const {title} = Astro.props
+
+---
+
+    <a
+      href="https://intranet.inah.gob.mx/blindaje_electoral/documentos_nuevos/Proceso_de_Blindaje_Electoral2_2024.pdf"
+      target="_blank"
+      class="h-full w-full p-2 group backdrop-blur-md relative rounded-xl border-2 border-[#fbbf24] bg-[#333]/20 shadow-inner shadow-white/10 transform hover:scale-105 hover:border-cyan-50"
+    >
+      <div class="flex justify-around align-middle h-7">
+        <LinkIcon class:list={['group-hover:animate-wiggle']} />
+        {
+          (
+            <div class="max-w-24 md:max-w-40 p-2  border border-black/10 rounded-xl flex justify-center items-center bg-black/40 ">
+              <span class="text-pretty line-clamp-2 text-[8px] sm:text-xs  md:text-sm md:line-clamp-1 capitalize">
+                {title}
+              </span>
+            </div>
+          )
+        }
+      </div>
+    </a>
